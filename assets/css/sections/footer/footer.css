@@ -1,15 +1,14 @@
-/*
----------------------------------------------
-Simple Portfolio Footer
----------------------------------------------
-*/
+
+/* ==========================================
+   Portfolio Footer
+   ========================================== */
 
 .portfolio-footer {
   position: relative;
-
   padding: 24px clamp(20px, 5vw, 70px);
 
   color: rgba(255, 255, 255, 0.76);
+
   background: linear-gradient(
     135deg,
     #09182d 0%,
@@ -19,15 +18,10 @@ Simple Portfolio Footer
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/*
----------------------------------------------
-Decorative Top Line
----------------------------------------------
-*/
+/* Decorative Top Line */
 
 .portfolio-footer::before {
   content: "";
-
   position: absolute;
 
   top: 0;
@@ -44,15 +38,12 @@ Decorative Top Line
   );
 
   border-radius: 0 0 999px 999px;
-
   transform: translateX(-50%);
 }
 
-/*
----------------------------------------------
-Footer Content
----------------------------------------------
-*/
+/* ==========================================
+   Footer Content
+   ========================================== */
 
 .portfolio-footer-bottom {
   position: relative;
@@ -67,12 +58,10 @@ Footer Content
   min-height: 42px;
 
   margin: 0 auto;
-  padding-right: 50px;
 }
 
 .portfolio-footer-bottom p {
   min-width: 0;
-
   margin: 0;
 
   color: rgba(255, 255, 255, 0.68);
@@ -84,11 +73,7 @@ Footer Content
   overflow-wrap: anywhere;
 }
 
-/*
----------------------------------------------
-Footer Roles
----------------------------------------------
-*/
+/* Footer Roles */
 
 .portfolio-footer-roles {
   display: flex;
@@ -96,7 +81,6 @@ Footer Roles
   flex-wrap: wrap;
 
   gap: 8px;
-
   min-width: 0;
 
   font-weight: 600;
@@ -104,90 +88,88 @@ Footer Roles
 
 .portfolio-footer-roles span {
   color: var(--seo-yellow, #f7c600);
-
   font-size: 12px;
   line-height: 1.3;
 }
 
-/*
----------------------------------------------
-Footer Credit
----------------------------------------------
-*/
+/* Footer Credit */
 
 .portfolio-footer-credit {
   flex: 0 1 auto;
-
   text-align: right;
 }
 
-/*
----------------------------------------------
-Back to Top Button
----------------------------------------------
-*/
+/* ==========================================
+   Floating Back to Top Button
+   ========================================== */
 
 .portfolio-footer-top {
-  position: absolute;
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 1000;
 
-  top: 50%;
-  right: 0;
-
-  z-index: 2;
-
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
 
-  width: 38px;
-  height: 38px;
+  width: 46px;
+  height: 46px;
 
-  padding: 0;
-
-  color: #ffffff;
-  background: var(--seo-blue, #0b63ce);
-
-  border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 50%;
+  background: var(--seo-blue, #0b63ce);
+  color: #ffffff;
 
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 6px 20px rgba(11, 99, 206, 0.25);
 
-  font-size: 14px;
-  line-height: 1;
   text-decoration: none;
 
-  transform: translateY(-50%);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transform: translateY(14px);
 
   transition:
-    color 0.25s ease,
-    background-color 0.25s ease,
-    border-color 0.25s ease,
-    box-shadow 0.25s ease,
-    transform 0.25s ease;
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    visibility 0.25s ease,
+    background-color 0.25s ease;
 }
 
-.portfolio-footer-top:hover,
-.portfolio-footer-top:focus-visible {
+/* Visible after Hero */
+
+.portfolio-footer-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+
+  transform: translateY(0);
+}
+
+/* Hover */
+
+.portfolio-footer-top.is-visible:hover {
+  background: #084c9e;
   color: #ffffff;
 
-  background: var(--seo-red, #e53935);
-  border-color: var(--seo-red, #e53935);
-
-  box-shadow: 0 10px 22px rgba(229, 57, 53, 0.22);
-
-  transform: translateY(calc(-50% - 2px));
+  transform: translateY(-3px);
 }
 
+/* Keyboard Accessibility */
+
 .portfolio-footer-top:focus-visible {
-  outline: 3px solid rgba(247, 198, 0, 0.8);
+  outline: 3px solid #93c5fd;
   outline-offset: 3px;
 }
 
-/*
----------------------------------------------
-Tablet and Mobile
----------------------------------------------
-*/
+.portfolio-footer-top i {
+  font-size: 17px;
+}
+
+/* ==========================================
+   Tablet
+   ========================================== */
 
 @media (max-width: 767px) {
   .portfolio-footer {
@@ -200,38 +182,22 @@ Tablet and Mobile
     justify-content: flex-start;
 
     gap: 8px;
-
     min-height: 0;
-    padding-right: 52px;
   }
 
   .portfolio-footer-credit {
     text-align: left;
   }
 
-  /*
-  Keep the button in the upper-right corner instead
-  of vertically centering it against wrapped content.
-  */
-
   .portfolio-footer-top {
-    top: 0;
-    right: 0;
-
-    transform: none;
-  }
-
-  .portfolio-footer-top:hover,
-  .portfolio-footer-top:focus-visible {
-    transform: translateY(-2px);
+    right: 20px;
+    bottom: 20px;
   }
 }
 
-/*
----------------------------------------------
-Mobile
----------------------------------------------
-*/
+/* ==========================================
+   Mobile
+   ========================================== */
 
 @media (max-width: 575px) {
   .portfolio-footer {
@@ -244,8 +210,6 @@ Mobile
 
   .portfolio-footer-bottom {
     gap: 9px;
-
-    padding-right: 48px;
   }
 
   .portfolio-footer-bottom p {
@@ -264,18 +228,17 @@ Mobile
   }
 
   .portfolio-footer-top {
-    width: 36px;
-    height: 36px;
+    right: 16px;
+    bottom: 16px;
 
-    font-size: 13px;
+    width: 42px;
+    height: 42px;
   }
 }
 
-/*
----------------------------------------------
-Extra Small Mobile
----------------------------------------------
-*/
+/* ==========================================
+   Extra Small Mobile
+   ========================================== */
 
 @media (max-width: 400px) {
   .portfolio-footer {
@@ -286,37 +249,18 @@ Extra Small Mobile
   .portfolio-footer::before {
     width: calc(100% - 32px);
   }
-
-  .portfolio-footer-bottom {
-    padding-right: 44px;
-  }
-
-  .portfolio-footer-top {
-    width: 34px;
-    height: 34px;
-  }
 }
 
-/*
----------------------------------------------
-Reduced Motion
----------------------------------------------
-*/
+/* ==========================================
+   Reduced Motion Accessibility
+   ========================================== */
 
 @media (prefers-reduced-motion: reduce) {
   .portfolio-footer-top {
     transition: none;
   }
 
-  .portfolio-footer-top:hover,
-  .portfolio-footer-top:focus-visible {
-    transform: translateY(-50%);
-  }
-
-  @media (max-width: 767px) {
-    .portfolio-footer-top:hover,
-    .portfolio-footer-top:focus-visible {
-      transform: none;
-    }
+  .portfolio-footer-top.is-visible:hover {
+    transform: none;
   }
 }

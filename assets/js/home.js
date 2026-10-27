@@ -329,9 +329,83 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.addEventListener("keydown", trapKeyboardFocus);
   };
 
+  
+/**
+ * Floating Back to Top Button
+ */
+const initializeBackToTop = () => {
+  const backToTop = document.getElementById("back-to-top");
+  const hero = document.getElementById("home");
+
+  if (!backToTop || !hero) {
+    return;
+  }
+
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  let updatePending = false;
+
+  const updateVisibility = () => {
+    // Show after the Hero section leaves the viewport.
+    const heroBottom = hero.getBoundingClientRect().bottom;
+    const isVisible = heroBottom <= 0;
+
+    backToTop.classList.toggle("is-visible", isVisible);
+
+    // Prevent keyboard focus when hidden.
+    if (isVisible) {
+      backToTop.removeAttribute("tabindex");
+      backToTop.removeAttribute("aria-hidden");
+    } else {
+      backToTop.setAttribute("tabindex", "-1");
+      backToTop.setAttribute("aria-hidden", "true");
+    }
+  };
+
+  const requestVisibilityUpdate = () => {
+    if (updatePending) {
+      return;
+    }
+
+    updatePending = true;
+
+    window.requestAnimationFrame(() => {
+      updateVisibility();
+      updatePending = false;
+    });
+  };
+
+  backToTop.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    window.scrollTo({
+      top: 0,
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+    });
+
+    window.history.replaceState(
+      null,
+      "",
+      `${window.location.pathname}${window.location.search}#home`
+    );
+  });
+
+  window.addEventListener("scroll", requestVisibilityUpdate, {
+    passive: true,
+  });
+
+  window.addEventListener("resize", requestVisibilityUpdate);
+
+  // Handle page refreshes at an existing scroll position.
+  updateVisibility();
+};
+
 
   initializeTypingEffect();
   initializeNavbarScrollSpy();
   initializeAuditModal();
+  initializeBackToTop();
 });
 

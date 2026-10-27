@@ -360,3 +360,39 @@ Contact Section
     transform: none;
   }
 }
+
+/* Contact Assistance Note */
+.contact-assistance-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 28px;
+  padding: 14px 20px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 50px;
+  background: rgba(148, 163, 184, 0.06);
+  text-align: center;
+}
+
+.contact-assistance-note i {
+  flex-shrink: 0;
+  font-size: 15px;
+  color: #64748b;
+}
+
+.contact-assistance-note p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #64748b;
+}
+
+@media (max-width: 576px) {
+  .contact-assistance-note {
+    border-radius: 16px;
+    padding: 12px 15px;
+    align-items: flex-start;
+    text-align: left;
+  }
+}
